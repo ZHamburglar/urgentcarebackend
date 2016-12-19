@@ -13,6 +13,8 @@
     "dotenv": "^2.0.0",
     "ejs": "~2.5.2",
     "express": "~4.14.0",
+    "express-jwt": "^5.1.0",
+    "jwt-simple": "^0.5.1",
     "mongoose": "^4.7.2",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0"
