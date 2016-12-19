@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var ProviderModel = require('../models/providers.js');
 var FacultyModel = require('../models/faculties.js');
+var PatientRequest = require('../models/patientrequest.js');
 
 //Doctor GET
 router.get('/doctors',function(req,res,next){
@@ -98,6 +99,16 @@ router.put('/faculty',function(req,res,next){
 
     res.send('UPDATED THAT SHIT!');
   });
+});
+
+/* GET all the messages for a nurse */
+router.get('/faculty/patientrequests', function(req, res, next) {
+PatientRequest.find({ userId: req.user.aud }, '', function(err, patientrequests) {
+  if (err) console.log(err);
+  console.log(patientrequests);
+
+  res.json(patientrequests);
+});
 });
 
 module.exports = router;
