@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
-  fullName: { type: String, required: true },
+  fullName: String,
   phone: String,
   email: String,
   schoolName: String,
-  schoolPhone: String,
+  schoolPhone: String
 });
 
 var FacultyModel = mongoose.model('Faculty', schema);

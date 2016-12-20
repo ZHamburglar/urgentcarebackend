@@ -15,10 +15,10 @@ var mongoose = require('mongoose');
 
 mongoose.connect(process.env.DB_URGENT_CARE);
 
-var jwtCheck = expressJwt({
-  secret: process.env.CLIENT_SECRET,
-  audience: process.env.CLIENT_ID
-});
+// var jwtCheck = express-jwt({
+//   secret: process.env.CLIENT_SECRET,
+//   audience: process.env.CLIENT_ID
+// });
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/care4kids', jwtCheck, care4kids);
+app.use('/care4kids', care4kids);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
