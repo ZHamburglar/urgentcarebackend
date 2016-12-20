@@ -16,6 +16,7 @@ var mongoose = require('mongoose');
 mongoose.connect(process.env.DB_URGENT_CARE);
 
 // var jwtCheck = expressJwt({
+
 //   secret: process.env.CLIENT_SECRET,
 //   audience: process.env.CLIENT_ID
 // });
