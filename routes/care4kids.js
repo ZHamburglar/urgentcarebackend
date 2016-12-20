@@ -102,13 +102,13 @@ router.put('/faculty',function(req,res,next){
 });
 
 /* GET all the messages for a nurse */
-router.get('/faculty/patientrequests', function(req, res, next) {
-PatientRequest.find({ userId: req.user.aud }, '', function(err, patientrequests) {
-  if (err) console.log(err);
-  console.log(patientrequests);
+router.get('/faculty/:facultyId', function(req, res){
+  FacultyModel.findById(req.params.facultyId, function(err, faculty){
+    if (err) console.log(err);
 
-  res.json(patientrequests);
-});
+    res.json(faculty);
+    console.log(faculty);
+  });
 });
 
 module.exports = router;
