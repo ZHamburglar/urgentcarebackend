@@ -6,8 +6,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var expressJwt = require('express-jwt');
-var jwt = require('jsonwebtoken');
+// var expressJwt = require('express-jwt');
+// var jwt = require('jsonwebtoken');
 
 
 var cors = require('cors');
@@ -15,7 +15,8 @@ var mongoose = require('mongoose');
 
 mongoose.connect(process.env.DB_URGENT_CARE);
 
-// var jwtCheck = express-jwt({
+// var jwtCheck = expressJwt({
+
 //   secret: process.env.CLIENT_SECRET,
 //   audience: process.env.CLIENT_ID
 // });
