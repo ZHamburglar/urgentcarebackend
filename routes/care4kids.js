@@ -76,7 +76,6 @@ router.post('/faculty',function(req,res,next){
 var newPost = new FacultyModel(postFacultyInfo);
 
 newPost.save(function(err,success){
-  // res.redirect('/dashboard');
   console.log("error",err);
   res.send("POSTED!");
   });
@@ -101,14 +100,56 @@ router.put('/faculty',function(req,res,next){
   });
 });
 
-/* GET all the messages for a nurse */
+// /* GET list of all faculty*/
+// router.get('/faculty/:facultyId', function(req, res){
+//   FacultyModel.findById(req.params.facultyId, function(err, faculty){
+//     if (err) console.log(err);
+//
+//     res.json(faculty);
+//     console.log(faculty);
+//   });
+// });
+
+/* GET a faculty member*/
 router.get('/faculty/:facultyId', function(req, res){
-  FacultyModel.findById(req.params.facultyId, function(err, faculty){
+  var facultyId = req.user.aud;
+  FacultyModel.findById(facultyId, function(err, faculty){
     if (err) console.log(err);
 
     res.json(faculty);
     console.log(faculty);
   });
 });
+
+//GET a patient request
+router.get('/patientrequest',function(req,res,next){
+  PatientRequest.find({},'',function( err,posts ){
+    if(err) console.error('Error gettting posts: ', err);
+    res.json(posts);
+  });
+});
+
+// POST a patient request
+router.post('/patientrequest',function(req,res,next){
+
+  var postPatientRequest = {
+    studentName: req.body.studentName,
+    studentDob: req.body.studentDob,
+    studentGender: req.body.studentGender,
+    allergies: req.body.allergies,
+    symptoms: req.body.symptoms
+  };
+
+var newPost = new PatientRequest(postPatientRequest);
+
+newPost.save(function(err,success){
+  console.log("error",err);
+  res.send("POSTED!");
+  });
+});
+
+// GET patient requests by Faculty ID
+
+
 
 module.exports = router;
