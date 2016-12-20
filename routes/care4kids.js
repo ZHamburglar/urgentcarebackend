@@ -78,7 +78,7 @@ var newPost = new FacultyModel(postFacultyInfo);
 newPost.save(function(err,success){
   // res.redirect('/dashboard');
   console.log("error",err);
-  res.send("POSTED BITCH");
+  res.send("POSTED!");
   });
 });
 
@@ -97,7 +97,7 @@ router.put('/faculty',function(req,res,next){
   FacultyModel.findByIdAndUpdate(id, updateInfo,function(err,post){
     if(err) console.log(err);
 
-    res.send('UPDATED THAT SHIT!');
+    res.send('UPDATED THAT SH*T!');
   });
 });
 
