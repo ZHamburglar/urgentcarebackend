@@ -1,6 +1,9 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
 
-var schema = new mongoose.Schema({
+var FacultyInfo = new mongoose.Schema({
+  type: ObjectId,
   fullName: String,
   phone: String,
   email: String,
@@ -8,7 +11,8 @@ var schema = new mongoose.Schema({
   schoolPhone: String
 });
 
-var FacultyModel = mongoose.model('Faculty', schema);
+
+var FacultyModel = mongoose.model('Faculty', FacultyInfo);
 
 // make this available to our other files
 module.exports = FacultyModel;
