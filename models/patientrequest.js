@@ -9,9 +9,9 @@ var RequestInfo = new Schema({
   studentGender: { type: String, required: true },
   allergies: String,
   symptoms: { type: String, required: true },
-  contact: String,
+  contact: { type: String, required: true },
+  timestamp : { type : Date, default: Date.now },
   completed: Boolean
-  // timestamps: Date
 });
 
 var PatientRequest = mongoose.model('PatientRequest', RequestInfo);
