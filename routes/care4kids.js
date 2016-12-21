@@ -125,6 +125,7 @@ router.get('/patientrequest/:facultyId',function(req,res,next){
 });
 
 // POST a patient request with facultyId
+
 router.post('/patientrequest',function(req,res,next){
 
   var postPatientRequest = {
@@ -141,7 +142,7 @@ var newPost = new PatientRequest(postPatientRequest);
 
 newPost.save(function(err,success){
   console.log("error",err);
-  res.send("POSTED!", postPatientRequest);
+  res.status("POSTED!", postPatientRequest);
   });
 });
 
