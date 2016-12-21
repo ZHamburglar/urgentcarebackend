@@ -12,11 +12,11 @@ router.get('/doctors',function(req,res,next){
   });
 });
 
-//Doctor Signup POST
-
+//Doctor Signup POST -- working
 router.post('/doctors',function(req,res,next){
 
   var postDocInfo = {
+    providerId: req.user.aud,
     fullName: req.body.fullName,
     title: req.body.title,
     phone: req.body.phone,
@@ -26,17 +26,16 @@ router.post('/doctors',function(req,res,next){
 
 var newPost = new ProviderModel(postDocInfo);
 
-
 newPost.save(function(err,success){
-  // res.redirect('/care4kids');
+  res.send("Doc Posted!");
+  //console.log(postDocInfo);
   console.log("error",err);
   });
 });
 
-//Doctor PUT (Update)
-
+//Doctor PUT (Update) -- NOT WORKING
 router.put('/doctors',function(req,res,next){
-  var id = req.body.id;
+  var providerId = req.body.id;
   var updateInfo = {
     fullName: req.body.fullName,
     title: req.body.title,
@@ -45,7 +44,7 @@ router.put('/doctors',function(req,res,next){
     specialty: req.body.specialty
   };
 
-  ProviderModel.findByIdAndUpdate(id, updateInfo,function(err,post){
+  ProviderModel.findByIdAndUpdate(providerId, updateInfo, function(err,post){
     if(err) console.log(err);
 
     res.send('SUCCESS!');
@@ -53,7 +52,6 @@ router.put('/doctors',function(req,res,next){
 });
 
 //Faculty GET
-
 router.get('/faculty',function(req,res,next){
   FacultyModel.find({},'',function( err,posts ){
     if(err) console.error('Error gettting posts: ', err);
@@ -61,11 +59,11 @@ router.get('/faculty',function(req,res,next){
   });
 });
 
-//Faculty Signup POST
-
+//Faculty Signup POST -- working
 router.post('/faculty',function(req,res,next){
 
   var postFacultyInfo = {
+    facultyId: req.user.aud,
     fullName: req.body.fullName,
     phone: req.body.phone,
     email: req.body.email,
@@ -81,10 +79,9 @@ newPost.save(function(err,success){
   });
 });
 
-//Faculty Update (PUT)
-
-router.put('/faculty',function(req,res,next){
-  var id = req.body.id;
+//Faculty Update (PUT) - NOT WORKING
+router.put('/faculty/',function(req,res,next){
+  var facultyId = req.user.aud;
   var updateInfo = {
     fullName: req.body.fullName,
     phone: req.body.phone,
@@ -93,27 +90,16 @@ router.put('/faculty',function(req,res,next){
     schoolPhone: req.body.schoolPhone
   };
 
-  FacultyModel.findByIdAndUpdate(id, updateInfo,function(err,post){
+  FacultyModel.findByIdAndUpdate(facultyId, updateInfo,function(err,post){
     if(err) console.log(err);
 
     res.send('UPDATED THAT SH*T!');
   });
 });
 
-// /* GET list of all faculty*/
-// router.get('/faculty/:facultyId', function(req, res){
-//   FacultyModel.findById(req.params.facultyId, function(err, faculty){
-//     if (err) console.log(err);
-//
-//     res.json(faculty);
-//     console.log(faculty);
-//   });
-// });
-
-/* GET a faculty member*/
+// GET a faculty member -- working
 router.get('/faculty/:facultyId', function(req, res){
-  var facultyId = req.user.aud;
-  FacultyModel.findById(facultyId, function(err, faculty){
+  FacultyModel.find({ facultyId: req.user.aud }, function(err, faculty){
     if (err) console.log(err);
 
     res.json(faculty);
@@ -129,10 +115,43 @@ router.get('/patientrequest',function(req,res,next){
   });
 });
 
-// POST a patient request
+// // POST a patient request by Faculty Id
+// router.post('/patientrequest', function(req, res) {
+//   var facultyId = req.user.aud;
+//   var studentName = req.body.studentName,
+//       studentDob = req.body.studentDob,
+//       studentGender = req.body.studentGender,
+//       allergies = req.body.allergies,
+//       symptoms = req.body.symptoms;
+//
+//       //body because it's coming from a form
+//
+//   // if (!symptoms) {
+//   //   res.status(400).send('Missing title'); // sending back a response code if title is not provided
+//   // }
+//
+//   var newRequest = new PatientRequest({
+//     facultyId: facultyId,
+//     studentName: studentName,
+//     studentDob: studentDob,
+//     studentGender: studentGender,
+//     allergies: allergies,
+//     symptoms: symptoms,
+//     created: new Date()
+//   });
+//
+//   newRequest.save(function(err, patientrequest) {
+//     if (err) console.log(err);
+//
+//     res.json(patientrequest);
+//   });
+// });
+
+// POST a patient request /// WORKS, BUT NOT DOES NOT INCLUDE FACULTY ID
 router.post('/patientrequest',function(req,res,next){
 
   var postPatientRequest = {
+    facultyId: req.user.aud,
     studentName: req.body.studentName,
     studentDob: req.body.studentDob,
     studentGender: req.body.studentGender,
@@ -144,12 +163,9 @@ var newPost = new PatientRequest(postPatientRequest);
 
 newPost.save(function(err,success){
   console.log("error",err);
-  res.send("POSTED!");
+  res.send("POSTED!", postPatientRequest);
   });
 });
-
-// GET patient requests by Faculty ID
-
 
 
 module.exports = router;

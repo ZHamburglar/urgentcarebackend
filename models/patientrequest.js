@@ -1,10 +1,9 @@
-
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
 var RequestInfo = new Schema({
-  facultyId: String, 
+  type: ObjectId,
   studentName: { type: String, required: true },
   studentDob: { type: String, required: true },
   studentGender: { type: String, required: true },
