@@ -111,7 +111,7 @@ router.put('/faculty/',function(req,res,next){
 //GET all patient requests
 router.get('/patientrequest/',function(req,res,next){
   PatientRequest.find({},'',function( err,posts ){
-    if(err) console.error('Error gettting posts: ', err);
+    if(err) console.error('Error getting posts: ', err);
     res.json(posts);
   });
 });
