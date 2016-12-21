@@ -133,7 +133,8 @@ router.post('/patientrequest',function(req,res,next){
     studentDob: req.body.studentDob,
     studentGender: req.body.studentGender,
     allergies: req.body.allergies,
-    symptoms: req.body.symptoms
+    symptoms: req.body.symptoms,
+    contact: req.body.contact
   };
 
 var newPost = new PatientRequest(postPatientRequest);
