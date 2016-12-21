@@ -68,7 +68,7 @@ router.post('/faculty',function(req,res,next){
     fullName: req.body.fullName,
     phone: req.body.phone,
     email: req.body.email,
-    schoolName: req.body.schooName,
+    schoolName: req.body.schoolName,
     schoolPhone: req.body.schoolPhone
   };
 
@@ -142,7 +142,7 @@ var newPost = new PatientRequest(postPatientRequest);
 
 newPost.save(function(err,success){
   console.log("error",err);
-  res.status("POSTED!", postPatientRequest);
+  res.send("POSTED!");
   });
 });
 
