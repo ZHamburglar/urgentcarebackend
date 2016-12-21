@@ -142,7 +142,7 @@ var newPost = new PatientRequest(postPatientRequest);
 
 newPost.save(function(err,success){
   console.log("error",err);
-  res.status("POSTED!", status);
+  res.status("POSTED!", postPatientRequest);
   });
 });
 
