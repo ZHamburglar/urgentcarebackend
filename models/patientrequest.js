@@ -10,7 +10,7 @@ var RequestInfo = new Schema({
   allergies: String,
   symptoms: { type: String, required: true },
   contact: String,
-  completed: Boolean,
+  completed: Boolean
   // timestamps: Date
 });
 
