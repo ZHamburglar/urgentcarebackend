@@ -3,6 +3,7 @@ var router = express.Router();
 var ProviderModel = require('../models/providers.js');
 var FacultyModel = require('../models/faculties.js');
 var PatientRequest = require('../models/patientrequest.js');
+var FacultyRequest = require('../models/facultyrequest.js');
 
 //Doctor GET
 router.get('/doctors',function(req,res,next){
@@ -81,8 +82,9 @@ newPost.save(function(err,success){
 
 //Faculty Update (PUT) - NOT WORKING
 router.put('/faculty/',function(req,res,next){
-  var facultyId = req.user.aud;
+
   var updateInfo = {
+    facultyId: req.user.aud,
     fullName: req.body.fullName,
     phone: req.body.phone,
     email: req.body.email,
@@ -90,7 +92,7 @@ router.put('/faculty/',function(req,res,next){
     schoolPhone: req.body.schoolPhone
   };
 
-  FacultyModel.findByIdAndUpdate(facultyId, updateInfo,function(err,post){
+  FacultyModel.findByIdAndUpdate({ facultyId: req.user.aud }, updateInfo,function(err,post){
     if(err) console.log(err);
 
     res.send('UPDATED THAT SH*T!');

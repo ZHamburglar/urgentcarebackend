@@ -18,7 +18,7 @@ var schema = new mongoose.Schema({
   created: Date
 });
 
-var model = mongoose.model('PatientRequest', schema);
+var model = mongoose.model('FacultyRequest', schema);
 
 // make this available to our other files
 module.exports = model;
