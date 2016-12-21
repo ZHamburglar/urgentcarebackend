@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var FacultyInfo = new mongoose.Schema({
-  type: ObjectId,
+  facultyId: String,
   fullName: String,
   phone: String,
   email: String,
