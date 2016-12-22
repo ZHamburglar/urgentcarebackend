@@ -17,7 +17,7 @@ router.get('/doctors',function(req,res,next){
 router.post('/doctors',function(req,res,next){
 
   var postDocInfo = {
-    providerId: req.user.aud,
+    providerId: req.user.sub,
     fullName: req.body.fullName,
     title: req.body.title,
     phone: req.body.phone,
@@ -36,7 +36,7 @@ newPost.save(function(err,success){
 
 //Doctor PUT (Update) -- Need to Test
 router.put('/doctors',function(req,res,next){
-  var providerId = req.user.aud;
+  var providerId = req.user.sub;
   var updateInfo = {
     fullName: req.body.fullName,
     title: req.body.title,
@@ -64,7 +64,7 @@ router.put('/doctors',function(req,res,next){
 router.post('/faculty',function(req,res,next){
 
   var postFacultyInfo = {
-    facultyId: req.user.aud,
+    facultyId: req.user.sub,
     fullName: req.body.fullName,
     phone: req.body.phone,
     email: req.body.email,
@@ -82,7 +82,7 @@ newPost.save(function(err,success){
 
 //Faculty Update (PUT) - Need to test
 router.put('/faculty/',function(req,res,next){
-  var facultyId = req.user.aud;
+  var facultyId = req.user.sub;
   var updateInfo = {
     fullName: req.body.fullName,
     phone: req.body.phone,
@@ -91,7 +91,7 @@ router.put('/faculty/',function(req,res,next){
     schoolPhone: req.body.schoolPhone
   };
 
-  FacultyModel.findByIdAndUpdate({ facultyId: req.user.aud }, updateInfo,function(err,post){
+  FacultyModel.findByIdAndUpdate({ facultyId: req.user.sub }, updateInfo,function(err,post){
     if(err) console.log(err);
 
     res.send('UPDATED THAT SH*T!');
@@ -100,7 +100,7 @@ router.put('/faculty/',function(req,res,next){
 
 // // GET a faculty member -- working
 // router.get('/faculty/:facultyId', function(req, res){
-//   FacultyModel.find({ facultyId: req.user.aud }, function(err, faculty){
+//   FacultyModel.find({ facultyId: req.user.sub }, function(err, faculty){
 //     if (err) console.log(err);
 //
 //     res.json(faculty);
@@ -117,8 +117,8 @@ router.get('/patientrequest/',function(req,res,next){
 });
 
 //GET a patient request by facultyId
-router.get('/patientrequest/:facultyId',function(req,res,next){
-  PatientRequest.find({ facultyId: req.user.aud },'',function( err,posts ){
+router.get('/patientrequest/',function(req,res,next){
+  PatientRequest.find({ facultyId: req.user.sub },'',function( err,posts ){
     if(err) console.error('Error gettting posts: ', err);
     res.json(posts);
   });
@@ -129,7 +129,7 @@ router.get('/patientrequest/:facultyId',function(req,res,next){
 router.post('/patientrequest',function(req,res,next){
 
   var postPatientRequest = {
-    facultyId: req.user.aud,
+    facultyId: req.user.sub,
     studentName: req.body.studentName,
     studentDob: req.body.studentDob,
     studentGender: req.body.studentGender,
