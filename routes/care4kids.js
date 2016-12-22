@@ -135,7 +135,8 @@ router.post('/patientrequest',function(req,res,next){
     studentGender: req.body.studentGender,
     allergies: req.body.allergies,
     symptoms: req.body.symptoms,
-    contact: req.body.contact
+    contact: req.body.contact,
+    completed: req.body.completed
   };
 
 var newPost = new PatientRequest(postPatientRequest);
