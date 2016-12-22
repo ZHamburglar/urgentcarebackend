@@ -117,7 +117,7 @@ router.get('/patientrequest/',function(req,res,next){
 });
 
 //GET a patient request by facultyId
-router.get('/patientrequest/:facultyId',function(req,res,next){
+router.get('/patientrequest/',function(req,res,next){
   PatientRequest.find({ facultyId: req.user.sub },'',function( err,posts ){
     if(err) console.error('Error gettting posts: ', err);
     res.json(posts);
